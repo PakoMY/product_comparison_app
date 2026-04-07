@@ -2,7 +2,11 @@ import React, {useMemo, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import Svg, {Polyline, Line, Text as SvgText} from 'react-native-svg';
 import {colors} from '../constants/colors';
-import {navToCumulativeReturnPercent, getXTickIndices, dateLabelAtIndex} from '../utils/chartHelper';
+import {
+  navToCumulativeReturnPercent,
+  getXTickIndices,
+  dateLabelAtIndex,
+} from '../utils/chartHelper';
 
 const PALETTE = ['#FF6A3D', '#2563EB', '#16A34A', '#CA8A04', '#9333EA'];
 const PAD = {l: 44, r: 12, t: 16, b: 32};
@@ -53,22 +57,22 @@ export function PerformanceChart({series, period}) {
     });
 
     const tickCount = 4;
-    const yTicks = [];
+    const yTickList = [];
     for (let i = 0; i <= tickCount; i++) {
       const ratio = i / tickCount;
       const val = min + (max - min) * (1 - ratio);
       const y = PAD.t + INNER_H * ratio;
-      yTicks.push({y, label: `${val.toFixed(2)}%`});
+      yTickList.push({y, label: `${val.toFixed(2)}%`});
     }
 
     const idxs = getXTickIndices(nPts);
-    const xTicks = idxs.map(i => ({
+    const xTickList = idxs.map(i => ({
       x: PAD.l + (nPts <= 1 ? innerW / 2 : (i / n) * innerW),
       label: dateLabelAtIndex(i, nPts, period),
     }));
 
     const h = PAD.t + INNER_H + PAD.b;
-    return {paths: pts, yTicks, xTicks, svgH: h};
+    return {paths: pts, yTicks: yTickList, xTicks: xTickList, svgH: h};
   }, [series, w, period]);
 
   return (
@@ -76,7 +80,14 @@ export function PerformanceChart({series, period}) {
       <Svg width={w} height={svgH}>
         {yTicks.map((t, i) => (
           <React.Fragment key={`y-${i}`}>
-            <Line x1={PAD.l} y1={t.y} x2={w - PAD.r} y2={t.y} stroke={colors.border} strokeWidth={1} />
+            <Line
+              x1={PAD.l}
+              y1={t.y}
+              x2={w - PAD.r}
+              y2={t.y}
+              stroke={colors.border}
+              strokeWidth={1}
+            />
             <SvgText x={2} y={t.y + 4} fontSize={9} fill={colors.subtext}>
               {t.label}
             </SvgText>
@@ -93,7 +104,13 @@ export function PerformanceChart({series, period}) {
           </SvgText>
         ))}
         {paths.map(p => (
-          <Polyline key={p.key} points={p.points} fill="none" stroke={p.color} strokeWidth={2} />
+          <Polyline
+            key={p.key}
+            points={p.points}
+            fill="none"
+            stroke={p.color}
+            strokeWidth={2}
+          />
         ))}
       </Svg>
     </View>

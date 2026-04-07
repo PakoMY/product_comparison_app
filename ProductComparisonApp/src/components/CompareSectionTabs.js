@@ -13,11 +13,18 @@ export function CompareSectionTabs({sections, activeIndex, onSelect}) {
         {sections.map((s, i) => {
           const active = i === activeIndex;
           return (
-            <Pressable key={s.key} onPress={() => onSelect(i)} style={styles.tabHit}>
-              <Text style={[styles.label, active && styles.labelActive]} numberOfLines={1}>
+            <Pressable
+              key={s.key}
+              onPress={() => onSelect(i)}
+              style={styles.tabHit}>
+              <Text
+                style={[styles.label, active && styles.labelActive]}
+                numberOfLines={1}>
                 {s.label}
               </Text>
-              <View style={[styles.underline, active && styles.underlineActive]} />
+              <View
+                style={[styles.underline, active && styles.underlineActive]}
+              />
             </Pressable>
           );
         })}

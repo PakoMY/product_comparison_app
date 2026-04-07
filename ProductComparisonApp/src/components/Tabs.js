@@ -13,7 +13,9 @@ export function Tabs({options, value, onChange}) {
             key={opt.key}
             onPress={() => onChange(opt.key)}
             style={[styles.tab, active && styles.tabActive]}>
-            <Text style={[styles.label, active && styles.labelActive]}>{opt.label}</Text>
+            <Text style={[styles.label, active && styles.labelActive]}>
+              {opt.label}
+            </Text>
           </Pressable>
         );
       })}

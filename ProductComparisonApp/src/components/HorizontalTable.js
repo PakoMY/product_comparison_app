@@ -27,7 +27,12 @@ export const HorizontalTable = forwardRef(function HorizontalTable(
       <View style={styles.table}>
         <View style={[styles.labelCol, {width: LABEL_COL_W}]}>
           {!hideMetricHeader ? (
-            <View style={[styles.labelCell, styles.borderBottom, styles.borderRight]}>
+            <View
+              style={[
+                styles.labelCell,
+                styles.borderBottom,
+                styles.borderRight,
+              ]}>
               <Text style={styles.headerText}>指标</Text>
             </View>
           ) : null}
@@ -55,7 +60,9 @@ export const HorizontalTable = forwardRef(function HorizontalTable(
             {!hideMetricHeader ? (
               <View style={[styles.dataRow, styles.borderBottom]}>
                 {heads.map((h, j) => (
-                  <View key={j} style={[styles.headCell, {minWidth: DATA_COL_MIN_W}]}>
+                  <View
+                    key={j}
+                    style={[styles.headCell, {minWidth: DATA_COL_MIN_W}]}>
                     <Text style={styles.headerText} numberOfLines={2}>
                       {h}
                     </Text>
@@ -73,7 +80,9 @@ export const HorizontalTable = forwardRef(function HorizontalTable(
                   hideMetricHeader && i === 0 && styles.headTopBorder,
                 ]}>
                 {row.values.map((cell, j) => (
-                  <View key={j} style={[styles.cell, {minWidth: DATA_COL_MIN_W}]}>
+                  <View
+                    key={j}
+                    style={[styles.cell, {minWidth: DATA_COL_MIN_W}]}>
                     <Text style={styles.cellText}>{cell}</Text>
                   </View>
                 ))}

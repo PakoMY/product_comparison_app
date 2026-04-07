@@ -9,7 +9,12 @@ import {ChartLegend} from '../components/ChartLegend';
 import {HorizontalTable} from '../components/HorizontalTable';
 import {useFundStore} from '../store/useFundStore';
 import {colors} from '../constants/colors';
-import {formatPercent, formatSignedPercent, formatYi, formatInt} from '../utils/format';
+import {
+  formatPercent,
+  formatSignedPercent,
+  formatYi,
+  formatInt,
+} from '../utils/format';
 import {alignNavSeries, fundRatingToStars} from '../utils/chartHelper';
 import {useHorizontalScrollSync} from '../hooks/useHorizontalScrollSync';
 
@@ -51,7 +56,8 @@ export function CompareScreen({navigation}) {
   const {refs: hRefs, onScrollFrom} = useHorizontalScrollSync(H_COUNT);
 
   const columnTitles = useMemo(
-    () => funds.map(f => (f.name.length > 10 ? `${f.name.slice(0, 10)}…` : f.name)),
+    () =>
+      funds.map(f => (f.name.length > 10 ? `${f.name.slice(0, 10)}…` : f.name)),
     [funds],
   );
 
@@ -67,23 +73,52 @@ export function CompareScreen({navigation}) {
   const overviewRows = useMemo(
     () => [
       {label: '成立时间', values: funds.map(f => f.inceptionDate ?? '—')},
-      {label: '基金规模', values: funds.map(f => (f.scale != null ? `${f.scale.toFixed(1)} 亿` : '—'))},
+      {
+        label: '基金规模',
+        values: funds.map(f =>
+          f.scale != null ? `${f.scale.toFixed(1)} 亿` : '—',
+        ),
+      },
       {label: '投资风格', values: funds.map(f => f.investStyle ?? '—')},
       {label: '风险等级', values: funds.map(f => f.riskLevel ?? '—')},
-      {label: '基金评级', values: funds.map(f => fundRatingToStars(f.fundRating))},
+      {
+        label: '基金评级',
+        values: funds.map(f => fundRatingToStars(f.fundRating)),
+      },
     ],
     [funds],
   );
 
   const perfRows = useMemo(
     () => [
-      {label: '近1月', values: funds.map(f => formatSignedPercent(f.performance.month1))},
-      {label: '近3月', values: funds.map(f => formatSignedPercent(f.performance.month3))},
-      {label: '近6月', values: funds.map(f => formatSignedPercent(f.performance.month6))},
-      {label: '近1年', values: funds.map(f => formatSignedPercent(f.performance.year1))},
-      {label: '近1月同类排名', values: funds.map(f => f.performanceRank.month1)},
-      {label: '近3月同类排名', values: funds.map(f => f.performanceRank.month3)},
-      {label: '近6月同类排名', values: funds.map(f => f.performanceRank.month6)},
+      {
+        label: '近1月',
+        values: funds.map(f => formatSignedPercent(f.performance.month1)),
+      },
+      {
+        label: '近3月',
+        values: funds.map(f => formatSignedPercent(f.performance.month3)),
+      },
+      {
+        label: '近6月',
+        values: funds.map(f => formatSignedPercent(f.performance.month6)),
+      },
+      {
+        label: '近1年',
+        values: funds.map(f => formatSignedPercent(f.performance.year1)),
+      },
+      {
+        label: '近1月同类排名',
+        values: funds.map(f => f.performanceRank.month1),
+      },
+      {
+        label: '近3月同类排名',
+        values: funds.map(f => f.performanceRank.month3),
+      },
+      {
+        label: '近6月同类排名',
+        values: funds.map(f => f.performanceRank.month6),
+      },
       {label: '近1年同类排名', values: funds.map(f => f.performanceRank.year1)},
     ],
     [funds],
@@ -91,18 +126,33 @@ export function CompareScreen({navigation}) {
 
   const probRows = useMemo(
     () => [
-      {label: '持有3月盈利概率', values: funds.map(f => formatPercent(f.profitProb.hold3m))},
-      {label: '持有6月盈利概率', values: funds.map(f => formatPercent(f.profitProb.hold6m))},
-      {label: '持有1年盈利概率', values: funds.map(f => formatPercent(f.profitProb.hold1y))},
+      {
+        label: '持有3月盈利概率',
+        values: funds.map(f => formatPercent(f.profitProb.hold3m)),
+      },
+      {
+        label: '持有6月盈利概率',
+        values: funds.map(f => formatPercent(f.profitProb.hold6m)),
+      },
+      {
+        label: '持有1年盈利概率',
+        values: funds.map(f => formatPercent(f.profitProb.hold1y)),
+      },
     ],
     [funds],
   );
 
   const riskRows = useMemo(
     () => [
-      {label: '最大回撤', values: funds.map(f => formatSignedPercent(f.risk.maxDrawdown))},
+      {
+        label: '最大回撤',
+        values: funds.map(f => formatSignedPercent(f.risk.maxDrawdown)),
+      },
       {label: '夏普比率', values: funds.map(f => f.risk.sharpe.toFixed(2))},
-      {label: '年化波动', values: funds.map(f => formatPercent(f.risk.volatility))},
+      {
+        label: '年化波动',
+        values: funds.map(f => formatPercent(f.risk.volatility)),
+      },
     ],
     [funds],
   );
@@ -111,7 +161,10 @@ export function CompareScreen({navigation}) {
     () => [
       {label: '股票', values: funds.map(f => formatPercent(f.portfolio.stock))},
       {label: '债券', values: funds.map(f => formatPercent(f.portfolio.bond))},
-      {label: '现金及其他', values: funds.map(f => formatPercent(f.portfolio.cash))},
+      {
+        label: '现金及其他',
+        values: funds.map(f => formatPercent(f.portfolio.cash)),
+      },
     ],
     [funds],
   );
@@ -120,9 +173,18 @@ export function CompareScreen({navigation}) {
     () => [
       {label: '经理', values: funds.map(f => f.manager.name)},
       {label: '综合得分', values: funds.map(f => String(f.manager.score))},
-      {label: '管理规模(亿)', values: funds.map(f => f.manager.manageScale.toFixed(0))},
-      {label: '年化回报', values: funds.map(f => formatSignedPercent(f.manager.annualReturn))},
-      {label: '任期回报(倍)', values: funds.map(f => f.manager.tenureReturn.toFixed(2))},
+      {
+        label: '管理规模(亿)',
+        values: funds.map(f => f.manager.manageScale.toFixed(0)),
+      },
+      {
+        label: '年化回报',
+        values: funds.map(f => formatSignedPercent(f.manager.annualReturn)),
+      },
+      {
+        label: '任期回报(倍)',
+        values: funds.map(f => f.manager.tenureReturn.toFixed(2)),
+      },
     ],
     [funds],
   );
@@ -190,6 +252,8 @@ export function CompareScreen({navigation}) {
     }, 100);
   }, []);
 
+  const navByFund = useCallback(f => f.nav?.[period] || [], [period]);
+
   if (!funds.length) {
     return (
       <View style={[styles.empty, {paddingTop: insets.top + 24}]}>
@@ -201,18 +265,23 @@ export function CompareScreen({navigation}) {
     );
   }
 
-  const navByFund = useCallback(f => f.nav?.[period] || [], [period]);
-
   return (
     <View style={[styles.root, {paddingTop: insets.top}]}>
       <View style={styles.header}>
-        <Pressable onPress={() => navigation.goBack()} hitSlop={12} style={styles.backHit}>
+        <Pressable
+          onPress={() => navigation.goBack()}
+          hitSlop={12}
+          style={styles.backHit}>
           <Text style={styles.backArrow}>‹</Text>
         </Pressable>
         <Text style={styles.headerTitle}>对比详情</Text>
         <View style={styles.headerRight} />
       </View>
-      <CompareSectionTabs sections={SECTIONS} activeIndex={activeSection} onSelect={scrollToSection} />
+      <CompareSectionTabs
+        sections={SECTIONS}
+        activeIndex={activeSection}
+        onSelect={scrollToSection}
+      />
       <FundNameBar ref={hRefs[0]} funds={funds} onScroll={onScrollFrom(0)} />
       <ScrollView
         ref={mainScrollRef}
@@ -234,7 +303,12 @@ export function CompareScreen({navigation}) {
         <View onLayout={onSectionLayout(1)}>
           <Text style={styles.sectionTitle}>收益走势</Text>
           <Tabs options={PERIOD_TABS} value={period} onChange={setPeriod} />
-          <ChartLegend funds={funds} navByFund={navByFund} period={period} palette={PALETTE} />
+          <ChartLegend
+            funds={funds}
+            navByFund={navByFund}
+            period={period}
+            palette={PALETTE}
+          />
           <PerformanceChart series={chartSeries} period={period} />
         </View>
         <View onLayout={onSectionLayout(2)}>
@@ -343,11 +417,27 @@ const styles = StyleSheet.create({
     borderBottomColor: colors.border,
     backgroundColor: colors.bg,
   },
-  backHit: {width: 44, height: 44, justifyContent: 'center', alignItems: 'center'},
+  backHit: {
+    width: 44,
+    height: 44,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   backArrow: {fontSize: 32, color: colors.text, marginTop: -4},
-  headerTitle: {flex: 1, textAlign: 'center', fontSize: 17, fontWeight: '700', color: colors.text},
+  headerTitle: {
+    flex: 1,
+    textAlign: 'center',
+    fontSize: 17,
+    fontWeight: '700',
+    color: colors.text,
+  },
   headerRight: {width: 44},
-  empty: {flex: 1, backgroundColor: colors.bg, alignItems: 'center', paddingHorizontal: 24},
+  empty: {
+    flex: 1,
+    backgroundColor: colors.bg,
+    alignItems: 'center',
+    paddingHorizontal: 24,
+  },
   emptyText: {fontSize: 15, color: colors.subtext, textAlign: 'center'},
   backBtn: {
     marginTop: 16,

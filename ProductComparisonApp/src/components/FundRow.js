@@ -8,7 +8,11 @@ export function FundRow({fund, selected, onToggle}) {
   return (
     <Pressable
       onPress={() => onToggle(fund.id)}
-      style={({pressed}) => [styles.row, pressed && styles.pressed, selected && styles.rowSelected]}>
+      style={({pressed}) => [
+        styles.row,
+        pressed && styles.pressed,
+        selected && styles.rowSelected,
+      ]}>
       <View style={[styles.check, selected && styles.checkOn]}>
         {selected ? <Text style={styles.checkMark}>✓</Text> : null}
       </View>
@@ -19,7 +23,9 @@ export function FundRow({fund, selected, onToggle}) {
         <Text style={styles.meta}>
           {fund.code} · {fund.type}
         </Text>
-        <Text style={styles.year1}>近1年收益 {formatSignedPercent(p.year1)}</Text>
+        <Text style={styles.year1}>
+          近1年收益 {formatSignedPercent(p.year1)}
+        </Text>
       </View>
     </Pressable>
   );

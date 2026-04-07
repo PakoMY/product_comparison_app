@@ -5,7 +5,10 @@ import React, {useRef, useCallback, useMemo} from 'react';
  * @param {number} count 参与联动的横向滚动区域数量（含名称栏）
  */
 export function useHorizontalScrollSync(count) {
-  const refs = useMemo(() => Array.from({length: count}, () => React.createRef()), [count]);
+  const refs = useMemo(
+    () => Array.from({length: count}, () => React.createRef()),
+    [count],
+  );
   const syncing = useRef(false);
 
   const onScrollFrom = useCallback(

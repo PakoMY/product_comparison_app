@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Alert,
-} from 'react-native';
+import {View, Text, FlatList, Pressable, StyleSheet, Alert} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {FundRow} from '../components/FundRow';
 import {useFundStore} from '../store/useFundStore';
@@ -50,7 +43,9 @@ export function FundListScreen({navigation}) {
       />
       <View style={[styles.bar, {paddingBottom: Math.max(insets.bottom, 12)}]}>
         <Text style={styles.count}>已选 {selectedIds.length} / 5</Text>
-        <Pressable onPress={onCompare} style={({pressed}) => [styles.btn, pressed && styles.btnPressed]}>
+        <Pressable
+          onPress={onCompare}
+          style={({pressed}) => [styles.btn, pressed && styles.btnPressed]}>
           <Text style={styles.btnText}>开始对比</Text>
         </Pressable>
       </View>

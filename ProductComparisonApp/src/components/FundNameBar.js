@@ -23,7 +23,12 @@ export const FundNameBar = forwardRef(function FundNameBar(
         scrollEventThrottle={scrollEventThrottle}>
         {funds.map((f, i) => (
           <View key={f.id} style={[styles.col, {minWidth: DATA_COL_MIN_W}]}>
-            <View style={[styles.dot, {backgroundColor: PALETTE[i % PALETTE.length]}]} />
+            <View
+              style={[
+                styles.dot,
+                {backgroundColor: PALETTE[i % PALETTE.length]},
+              ]}
+            />
             <Text style={styles.name} numberOfLines={2}>
               {f.name}
             </Text>

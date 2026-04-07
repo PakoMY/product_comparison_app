@@ -15,8 +15,16 @@ export default function App() {
       <NavigationContainer>
         <StatusBar barStyle="dark-content" backgroundColor={colors.bg} />
         <Stack.Navigator>
-          <Stack.Screen name="FundList" component={FundListScreen} options={{title: '基金对比'}} />
-          <Stack.Screen name="Compare" component={CompareScreen} options={{headerShown: false}} />
+          <Stack.Screen
+            name="FundList"
+            component={FundListScreen}
+            options={{title: '基金对比'}}
+          />
+          <Stack.Screen
+            name="Compare"
+            component={CompareScreen}
+            options={{headerShown: false}}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </SafeAreaProvider>

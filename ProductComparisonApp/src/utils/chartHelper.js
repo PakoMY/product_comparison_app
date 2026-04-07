@@ -24,7 +24,7 @@ export function navToCumulativeReturnPercent(navArr) {
   if (!base) {
     return [];
   }
-  return navArr.map(v => ((v / base) - 1) * 100);
+  return navArr.map(v => (v / base - 1) * 100);
 }
 
 /**
@@ -34,7 +34,9 @@ export function alignNavSeries(seriesList) {
   if (!seriesList?.length) {
     return [];
   }
-  const minLen = Math.min(...seriesList.map(s => (s?.data || []).length).filter(Boolean));
+  const minLen = Math.min(
+    ...seriesList.map(s => (s?.data || []).length).filter(Boolean),
+  );
   if (!minLen) {
     return seriesList.map(s => ({...s, data: s.data || []}));
   }
